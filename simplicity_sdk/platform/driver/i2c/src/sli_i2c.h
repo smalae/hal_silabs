@@ -43,7 +43,7 @@ extern "C" {
  *******************************   DEFINES   ***********************************
  ******************************************************************************/
 // Max number of descriptors for dma tx and rx operations.
-#define SL_I2C_DMA_MAX_TX_DESCRIPTOR_COUNT 2
+#define SL_I2C_DMA_MAX_TX_DESCRIPTOR_COUNT 5
 #define SL_I2C_DMA_MAX_RX_DESCRIPTOR_COUNT 5
 
 /*******************************************************************************
@@ -116,6 +116,9 @@ typedef struct {
   uint8_t addr_buffer[3];                            /// Address buffer.
   sl_i2c_irq_callback_t callback;                    /// I2C Callback.
   void *context;                                     /// User-defined context.
+  uint8_t addr_buffer_write[1];
+  uint8_t addr_buffer_read[1];
+  uint8_t rstart;
 } sli_i2c_instance_t;
 
 /***************************************************************************//**
@@ -173,14 +176,14 @@ void sli_i2c_transfer_init(I2C_TypeDef *i2c_base_addr,
 sl_status_t sli_i2c_dma_transfer_init(sli_i2c_instance_t *i2c_instance);
 
 /***************************************************************************//**
- * Handles the I2C leader mode non-blocking interrupt dispatch.
+ * This function handles the I2C leader mode non-blocking interrupt dispatch.
  *
  * @param[in] sl_i2c_instance   Pointer to the I2C instance structure.
  ******************************************************************************/
 void sli_i2c_leader_dispatch_interrupt(sli_i2c_instance_t *sl_i2c_instance);
 
 /***************************************************************************//**
- * Handles the I2C follower mode non-blocking interrupt dispatch.
+ * This function handles the I2C follower mode non-blocking interrupt dispatch.
  *
  * @param[in] sl_i2c_instance   Pointer to the I2C instance structure.
  ******************************************************************************/

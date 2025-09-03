@@ -300,6 +300,14 @@ sl_status_t sl_i2c_receive_non_blocking(sl_i2c_handle_t i2c_handle,
                                         uint16_t rx_len,
                                         sl_i2c_irq_callback_t i2c_callback,
                                         void *context);
+                                        
+sl_status_t sl_i2c_transfer_non_blocking(sl_i2c_handle_t i2c_handle,
+                                         const uint8_t *tx_buffer,
+                                         uint16_t tx_len,
+                                         uint8_t *rx_buffer,
+                                         uint16_t rx_len,
+                                         sl_i2c_irq_callback_t i2c_callback,
+                                         void *context);
 
 /** @} (end addtogroup i2c driver) */
 #ifdef __cplusplus
